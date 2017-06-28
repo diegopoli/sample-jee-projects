@@ -1,5 +1,5 @@
 # Java EE Sample Projects
-These samples illustrate the use of [Java EE](http://www.oracle.com/technetwork/java/javaee/overview/index.html) a variety of web applications.
+These samples illustrate the use of [Java EE](http://www.oracle.com/technetwork/java/javaee/overview/index.html) to build a variety of web applications.
 
 ## Pre-requisites
 
