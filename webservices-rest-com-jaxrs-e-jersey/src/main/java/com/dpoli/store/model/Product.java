@@ -2,6 +2,8 @@ package com.dpoli.store.model;
 
 import java.io.Serializable;
 
+import com.thoughtworks.xstream.XStream;
+
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -48,5 +50,9 @@ public class Product implements Serializable {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public String toXML() {
+		return new XStream().toXML(this);
 	}
 }
