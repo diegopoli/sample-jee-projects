@@ -2,6 +2,7 @@ package com.dpoli.store.model;
 
 import java.io.Serializable;
 
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
 public class Product implements Serializable {
@@ -54,5 +55,9 @@ public class Product implements Serializable {
 
 	public String toXML() {
 		return new XStream().toXML(this);
+	}
+
+	public String toJson() {
+		return new Gson().toJson(this);
 	}
 }
