@@ -1,10 +1,15 @@
 package com.dpoli.store.resource;
 
+import java.net.URI;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.dpoli.store.dao.ProjectDAO;
 import com.dpoli.store.model.Project;
@@ -14,9 +19,10 @@ import com.thoughtworks.xstream.XStream;
 public class ProjectResource {
 
 	@GET
+	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public String search() {
-		Project dao = new ProjectDAO().search(1l);
+	public String search(@PathParam("id") long id) {
+		Project dao = new ProjectDAO().search(id);
 		return dao.toXML();
 	}
 
@@ -28,10 +34,11 @@ public class ProjectResource {
 	}
 
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	public String add(String contant) {
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response add(String contant) {
 		Project project = (Project) new XStream().fromXML(contant);
 		new ProjectDAO().add(project);
-		return "<status>success</status>";
+		URI location = URI.create("/project/" + project.getId());
+		return Response.created(location).build();
 	}
 }

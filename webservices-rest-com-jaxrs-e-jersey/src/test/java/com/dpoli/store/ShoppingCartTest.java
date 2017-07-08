@@ -20,6 +20,7 @@ import com.thoughtworks.xstream.XStream;
 public class ShoppingCartTest {
 
 	private HttpServer server;
+	private Client client;
 
 	@Before
 	public void startServer() {
@@ -34,7 +35,7 @@ public class ShoppingCartTest {
 	@Test
 	public void testUriConnection() {
 
-		Client client = ClientBuilder.newClient();
+		this.client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:8080");
 		String content = target.path("/shoppingCart/1").request().get(String.class);
 		Assert.assertTrue(content.contains("FIFA 2017"));
@@ -45,14 +46,19 @@ public class ShoppingCartTest {
 	@Test
 	public void testAddItem() {
 
-		Client client = ClientBuilder.newClient();
+		this.client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:8080");
 		ShoppingCart shoppingCart = new ShoppingCart().setId(3);
 		shoppingCart.setData("1 Hacker Way", "Menlo Park, CA");
 		shoppingCart.add(new Product(1, "Tablet", 10, 100.5));
 		String xml = shoppingCart.toXML();
 		Entity<String> entity = Entity.entity(xml, MediaType.APPLICATION_XML);
-		Response response = (Response) target.path("/shoppingCart").request().post(entity);
-		Assert.assertEquals("<status>success</status>", response.readEntity(String.class));
+
+		Response response = target.path("/shoppingCart").request().post(entity);
+		Assert.assertEquals(201, response.getStatus());
+
+		String location = response.getHeaderString("Location");
+		String content = this.client.target(location).request().get(String.class);
+		Assert.assertTrue(content.contains("Tablet"));
 	}
 }
