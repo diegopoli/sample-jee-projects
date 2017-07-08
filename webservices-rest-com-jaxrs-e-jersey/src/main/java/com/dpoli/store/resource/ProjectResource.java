@@ -3,6 +3,7 @@ package com.dpoli.store.resource;
 import java.net.URI;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,15 +23,15 @@ public class ProjectResource {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	public String search(@PathParam("id") long id) {
-		Project dao = new ProjectDAO().search(id);
-		return dao.toXML();
+		Project project = new ProjectDAO().search(id);
+		return project.toXML();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String searchJson() {
-		Project dao = new ProjectDAO().search(1l);
-		return dao.toJson();
+		Project project = new ProjectDAO().search(1l);
+		return project.toJson();
 	}
 
 	@POST
@@ -40,5 +41,12 @@ public class ProjectResource {
 		new ProjectDAO().add(project);
 		URI location = URI.create("/project/" + project.getId());
 		return Response.created(location).build();
+	}
+
+	@DELETE
+	@Path("{id}")
+	public Response delete(@PathParam("id") long id) {
+		new ProjectDAO().remove(id);
+		return Response.ok().build();
 	}
 }

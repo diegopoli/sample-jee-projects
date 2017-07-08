@@ -23,8 +23,8 @@ public class ShoppingCartResource {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	public String search(@PathParam("id") long id) {
-		ShoppingCart dao = new ShoppingCartDAO().search(id);
-		return dao.toXML();
+		ShoppingCart shoppingCart = new ShoppingCartDAO().search(id);
+		return shoppingCart.toXML();
 	}
 
 	@POST
@@ -36,11 +36,11 @@ public class ShoppingCartResource {
 		return Response.created(location).build();
 	}
 
-	@Path("{id}/products/{productId}")
 	@DELETE
+	@Path("{id}/products/{productId}")
 	public Response deleteProduct(@PathParam("id") long id, @PathParam("productId") long productId) {
-		ShoppingCart dao = new ShoppingCartDAO().search(id);
-		dao.delete(productId);
+		ShoppingCart shoppingCart = new ShoppingCartDAO().search(id);
+		shoppingCart.delete(productId);
 		return Response.ok().build();
 	}
 }
