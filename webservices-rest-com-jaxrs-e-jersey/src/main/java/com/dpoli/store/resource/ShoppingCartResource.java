@@ -3,6 +3,7 @@ package com.dpoli.store.resource;
 import java.net.URI;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -33,5 +34,13 @@ public class ShoppingCartResource {
 		new ShoppingCartDAO().add(shoppingCart);
 		URI location = URI.create("/shoppingCart/" + shoppingCart.getId());
 		return Response.created(location).build();
+	}
+
+	@Path("{id}/products/{productId}")
+	@DELETE
+	public Response deleteProduct(@PathParam("id") long id, @PathParam("productId") long productId) {
+		ShoppingCart dao = new ShoppingCartDAO().search(id);
+		dao.delete(productId);
+		return Response.ok().build();
 	}
 }
