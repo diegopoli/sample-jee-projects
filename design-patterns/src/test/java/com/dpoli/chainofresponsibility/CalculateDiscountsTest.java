@@ -45,7 +45,7 @@ public class CalculateDiscountsTest {
 	}
 
 	@Test
-	public void testMoreThan500DollarsDiscount() {
+	public void testMoreThan500DollarsBudgetDiscount() {
 
 		CalculateDiscounts discounts = new CalculateDiscounts();
 

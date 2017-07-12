@@ -2,7 +2,7 @@ package com.dpoli.chainofresponsibility;
 
 import com.dpoli.strategy.Budget;
 
-public class MoreThan500DollarsDiscount implements Discount {
+public class MoreThan500DollarsBudgetDiscount implements Discount {
 
 	private Discount nextDiscount;
 

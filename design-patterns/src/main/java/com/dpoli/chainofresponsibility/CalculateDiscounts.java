@@ -7,7 +7,7 @@ public class CalculateDiscounts {
 	public double calculate(Budget budget) {
 
 		Discount firstDiscount = new MoreThanFiveItemsDiscount();
-		Discount secondDiscount = new MoreThan500DollarsDiscount();
+		Discount secondDiscount = new MoreThan500DollarsBudgetDiscount();
 		Discount noDiscount = new NoDiscount();
 
 		// Sets up next discounts.
