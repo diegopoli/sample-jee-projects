@@ -1,6 +1,7 @@
 package com.dpoli.strategy;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 public class CalculateTaxesTest {
@@ -15,7 +16,7 @@ public class CalculateTaxesTest {
 		CalculateTaxes calculateTaxes = new CalculateTaxes();
 		double value = calculateTaxes.calculate(budget, icms);
 
-		Assert.assertEquals((500.0 * 0.1), value, DELTA);
+		assertEquals((500.0 * 0.1), value, DELTA);
 	}
 
 	@Test
@@ -26,6 +27,6 @@ public class CalculateTaxesTest {
 		CalculateTaxes calculateTaxes = new CalculateTaxes();
 		double value = calculateTaxes.calculate(budget, iss);
 
-		Assert.assertEquals((500.0 * 0.06), value, DELTA);
+		assertEquals((500.0 * 0.06), value, DELTA);
 	}
 }
