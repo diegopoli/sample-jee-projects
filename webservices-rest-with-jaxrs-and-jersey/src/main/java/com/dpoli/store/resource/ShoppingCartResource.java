@@ -24,15 +24,15 @@ public class ShoppingCartResource {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public String search(@PathParam("id") long id) {
+	public ShoppingCart search(@PathParam("id") long id) {
 		ShoppingCart shoppingCart = new ShoppingCartDAO().search(id);
-		return shoppingCart.toXML();
+		return shoppingCart;
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
-	public Response add(String content) {
-		ShoppingCart shoppingCart = (ShoppingCart) new XStream().fromXML(content);
+	public Response add(ShoppingCart shoppingCart) {
+		//ShoppingCart shoppingCart = (ShoppingCart) new XStream().fromXML(content);
 		new ShoppingCartDAO().add(shoppingCart);
 		URI location = URI.create("/shoppingCart/" + shoppingCart.getId());
 		return Response.created(location).build();

@@ -5,10 +5,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ShoppingCart implements Serializable {
+
+	// @XmlRootElement - Maps the class to an XML element.
+	// @XmlAccessorType(XmlAccessType.FIELD) - Sets all fields as serialized by default.
+	// JAXB requires a default constructor (with no arguments).
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,6 +26,9 @@ public class ShoppingCart implements Serializable {
 	private String address;
 	private String city;
 	private List<Product> products = new ArrayList<>();
+
+	public ShoppingCart() {
+	}
 
 	public ShoppingCart add(Product product) {
 		products.add(product);

@@ -20,6 +20,7 @@ public class ProjectTest {
 
 	private HttpServer server;
 	private Client client;
+	private WebTarget target;
 
 	@Before
 	public void startServer() {
@@ -34,8 +35,8 @@ public class ProjectTest {
 	@Test
 	public void testUriConnection() {
 
-		this.client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080");
+		client = ClientBuilder.newClient();
+		target = client.target("http://localhost:8080");
 		String content = target.path("/project/1").request().get(String.class);
 		Assert.assertTrue(content.contains("Project 01"));
 		Project project = (Project) new XStream().fromXML(content);
@@ -45,7 +46,7 @@ public class ProjectTest {
 	@Test
 	public void testAddProject() {
 
-		this.client = ClientBuilder.newClient();
+		client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:8080");
 		Project project = new Project(3, "Project 03", 2017);
 		String xml = project.toXML();

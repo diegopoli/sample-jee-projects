@@ -2,10 +2,20 @@ package com.dpoli.store.model;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Product implements Serializable {
+
+	// @XmlRootElement - Maps the class to an XML element.
+	// @XmlAccessorType(XmlAccessType.FIELD) - Sets all fields as serialized by default.
+	// JAXB requires a default constructor (with no arguments).
 
 	private static final long serialVersionUID = 1L;
 
@@ -13,6 +23,9 @@ public class Product implements Serializable {
 	private String description;
 	private int quantity;
 	private double price;
+
+	public Product() {
+	}
 
 	public Product(long id, String description, int quantity, double price) {
 		this.id = id;
