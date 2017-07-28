@@ -3,6 +3,8 @@ These samples illustrate the use of [Java EE](http://www.oracle.com/technetwork/
 
 ## Projects
 * [RESTful Web Services](http://docs.oracle.com/javaee/6/tutorial/doc/gijqy.html) with [JAX-RS](https://github.com/jax-rs) and [Jersey](https://jersey.github.io/).
+  - [XStream](http://x-stream.github.io/)
+  - [Java Architecture for XML Binding (JAXB)](http://www.oracle.com/technetwork/articles/javase/index-140168.html)
 * Common Design Patterns
   - Singleton
   - Strategy
