@@ -1,5 +1,8 @@
 package com.dpoli.inventory.model.item;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Item {
 
 	private String code;

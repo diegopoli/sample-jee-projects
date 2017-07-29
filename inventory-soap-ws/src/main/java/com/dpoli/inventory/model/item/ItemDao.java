@@ -9,9 +9,14 @@ import java.util.Map;
 public class ItemDao {
 
 	private static Map<String, Item> ITEMS = new LinkedHashMap<>();
+	private static ItemDao instance = new ItemDao();
 
-	public ItemDao() {
+	private ItemDao() {
 		addItemsToMap();
+	}
+
+	public static ItemDao getInstance() {
+		return instance;
 	}
 
 	public void save(Item item) {
