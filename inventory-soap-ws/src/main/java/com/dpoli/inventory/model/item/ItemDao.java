@@ -23,7 +23,7 @@ public class ItemDao {
 		ITEMS.put(item.getCode(), item);
 	}
 
-	public List<Item> allItems(List<Filter> filters) {
+	public List<Item> allItemsWithFilter(List<Filter> filters) {
 
 		List<Item> result = new ArrayList<>();
 		Collection<Item> allItems = ITEMS.values();
