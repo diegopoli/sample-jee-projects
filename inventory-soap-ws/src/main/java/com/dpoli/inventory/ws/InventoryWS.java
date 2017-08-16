@@ -1,19 +1,26 @@
 package com.dpoli.inventory.ws;
 
-import java.util.List;
-
+import javax.jws.WebMethod;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 
-import com.dpoli.inventory.model.item.Item;
 import com.dpoli.inventory.model.item.ItemDao;
+import com.dpoli.inventory.model.item.ItemsList;
 
 @WebService
 public class InventoryWS {
 
 	private ItemDao itemDao = ItemDao.getInstance();
 
-	public List<Item> getItems() {
+	@WebMethod(operationName = "searchAllItems")
+	@WebResult(name = "items")
+	public ItemsList getItems() {
 		System.out.println("Calling method getItems()");
-		return itemDao.allItemsWithNoFilter();
+		return new ItemsList(itemDao.allItemsWithNoFilter());
+	}
+
+	@WebMethod(exclude = true)
+	public void methodToExclude() {
+		// Marks this method to NOT be exposed as a web method.
 	}
 }
