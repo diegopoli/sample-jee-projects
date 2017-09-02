@@ -13,6 +13,7 @@ import com.dpoli.inventory.model.item.Filter;
 import com.dpoli.inventory.model.item.Filters;
 import com.dpoli.inventory.model.item.Item;
 import com.dpoli.inventory.model.item.ItemDao;
+import com.dpoli.inventory.model.item.ItemValidator;
 import com.dpoli.inventory.model.user.AuthorizationException;
 import com.dpoli.inventory.model.user.TokenDao;
 import com.dpoli.inventory.model.user.TokenUser;
@@ -57,6 +58,9 @@ public class InventoryWS {
 		if (!isValid) {
 			throw new AuthorizationException("Authorization failed!");
 		}
+
+		// Validates item
+		new ItemValidator(item).validate();
 
 		// Saves the item
 		this.itemDao.save(item);
