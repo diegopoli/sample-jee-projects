@@ -9,6 +9,8 @@ public class PublishWebService {
 		InventoryWS service = new InventoryWS();
 		String url = "http://localhost:8080/inventory-soap-ws";
 
+		System.out.println("InventoryWS up and running on: " + url);
+
 		// Endpoints are a concrete address of a given service.
 		// Here we bind the endpoint (URL) with the service implementation.
 		Endpoint.publish(url, service);
